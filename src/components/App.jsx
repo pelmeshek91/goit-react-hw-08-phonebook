@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { HomePage } from 'pages/HomePage/HomePage';
-// import { UsersPage } from 'pages/UsersPage/UsersPage';
-// import { LoginPage } from 'pages/LoginPage/LoginPage';
-// import { RegisterPage } from 'pages/RegisterPage/RegisterForm';
+import { UsersPage } from 'pages/UserPage/UserPage';
+import { LoginPage } from 'pages/LoginPage/LoginPage';
+import { RegisterPage } from 'pages/RegisterPage/RegisterPage';
 import { Layout } from './Layout/Layout';
 import { PrivateRoute } from 'HOCs/PrivateRoute';
 import { PublicRoute } from 'HOCs/PublicRoute';
@@ -33,20 +33,16 @@ export const App = () => {
               }
             />
             <Route
-              path="users"
-              element={<PrivateRoute>{/* <UsersPage /> */}</PrivateRoute>}
+              path="contacts"
+              element={<PrivateRoute>{<UsersPage />}</PrivateRoute>}
             />
             <Route
               path="register"
-              element={
-                <PublicRoute restricted>{/* <RegisterPage /> */}</PublicRoute>
-              }
+              element={<PublicRoute restricted>{<RegisterPage />}</PublicRoute>}
             />
             <Route
               path="login"
-              element={
-                <PublicRoute restricted>{/* <LoginPage /> */}</PublicRoute>
-              }
+              element={<PublicRoute restricted>{<LoginPage />}</PublicRoute>}
             />
           </Route>
         </Routes>

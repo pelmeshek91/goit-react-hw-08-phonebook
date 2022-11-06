@@ -1,25 +1,10 @@
-import {fetchContacts} from 'redux/contacts/contactsOperations';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-// import { Form } from './Form/Form';
-// import { Section } from './Section/Section';
-// import { ContactList } from './PhoneList/PhoneList';
-// import { Filter } from './Filter/Filter';
+import { useSelector } from 'react-redux';
+import { selectName } from 'redux/auth/authSelectors';
+import s from './HomePage.module.css';
+
 
 export const HomePage = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
-  return (
-    <>
-      {/* <Section title="PhoneContact">
-        <Form />
-      </Section>
-      <Section title="Contacts"> */}
-        {/* <Filter /> */}
-        {/* <ContactList/>
-      </Section> */}
-    </>
-  );
-};
+  const name = useSelector(selectName)
+  return (<>{!name ?(<h2 className={s.mainText}>Welcome to Phonebook!</h2>):
+   (<h2 className={s.mainText}>Welcome {name}!</h2>)
+}</>)}

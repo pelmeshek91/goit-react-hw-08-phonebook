@@ -1,60 +1,39 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contacts/contactsOperations';
-import { selectContacts } from 'redux/contacts/contactsSelector';
-
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateContact } from 'redux/contacts/contactsOperations';
 import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import s from './Form.module.css';
+import s from '../Form/Form.module.css';
 
-export const Form = () => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+export const UpdateForm = ({ contact, closeForm }) => {
+  const [name, setName] = useState(contact.name);
+  const [number, setNumber] = useState(contact.number);
 
   const dispatch = useDispatch();
 
-  const handleChange = e => {
-    const { name, value } = e.currentTarget;
-
+  const handleChange = ({ target: { name, value } }) => {
     switch (name) {
-      case 'number':
-        setNumber(value);
-        break;
-
       case 'name':
         setName(value);
         break;
-
+      case 'number':
+        setNumber(value);
+        break;
       default:
-        return;
+        break;
     }
   };
-  const oldContacts = useSelector(selectContacts);
 
   const handleSubmit = event => {
     event.preventDefault();
-
-    const newContactData = {
-      name,
-      number,
-    };
-
-    if (
-      oldContacts.some(
-        contact =>
-          contact.name.toLowerCase() === newContactData.name.toLowerCase()
-      )
-    ) {
-      alert(`contact with ${newContactData.name} has already been created`);
-      return;
-    }
-
-    dispatch(addContact(newContactData));
+    dispatch(updateContact({ ...contact, name, number }));
     setName('');
     setNumber('');
+    closeForm();
   };
 
   return (
+
     <form onSubmit={handleSubmit} className={s.formMain}>
       <TextField
         id="outlined-basic"
@@ -84,8 +63,8 @@ export const Form = () => {
       />
 
       <Button type="submit" variant="outlined" margin="0">
-        Add contact
+        Save
       </Button>
     </form>
-  );
+   );
 };

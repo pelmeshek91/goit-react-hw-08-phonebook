@@ -1,46 +1,31 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchUsers } from 'redux/users/users-operations';
-import { selectIsLoading, selectError } from 'redux/contacts/contactsSelector';
-
-import { Button } from 'components/Button/Button';
-import { UsersList } from 'components/UsersList/UsersList';
-import { AddForm } from 'components/AddForm/AddForm';
+import { useSelector } from 'react-redux';
+import { selectError } from 'redux/contacts/contactsSelector';
+import { fetchContacts } from 'redux/contacts/contactsOperations';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { ContactList } from 'components/PhoneList/PhoneList';
+import { Form } from 'components/Form/Form';
+import { Filter } from 'components/Filter/Filter';
+import { selectName } from 'redux/auth/authSelectors';
+import s from './UserPage.module.css';
 
 export const UsersPage = () => {
-  const [isListShown, setIsListShown] = useState(false);
-  const [isFormShown, setIsFormShown] = useState(false);
-  const dispatch = useDispatch();
-
-  const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
-
-  const changeVisibility = () => {
-    setIsListShown(true);
-    dispatch(fetchUsers());
-  };
-
-  const showForm = () => {
-    setIsFormShown(true);
-  };
-
-  const closeForm = () => {
-    setIsFormShown(false);
-  };
+  const userName = useSelector(selectName);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (userName.length === 0) return;
+    dispatch(fetchContacts());
+  }, [dispatch, userName]);
 
   return (
-    <>
-      {isListShown ? (
-        <>
-          {isLoading && <h1>LOADING...</h1>}
-          <UsersList />
-          {!isLoading && <Button text="Add user" clickHandler={showForm} />}
-          {isFormShown && <AddForm closeForm={closeForm} />}
-        </>
-      ) : (
-        <Button text="Show list of users" clickHandler={changeVisibility} />
-      )}
+    <div className={s.userPage}>
+      <Form />
+      <div className={s.filtredContacts}>
+        <Filter />
+        <ContactList />
+      </div>
       {error && <p>{error.message}</p>}
-    </>
+    </div>
   );
 };
