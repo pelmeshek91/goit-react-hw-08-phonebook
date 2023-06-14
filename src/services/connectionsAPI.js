@@ -16,6 +16,7 @@ export const getAllContacts = async () => {
 };
 export const addContact = async contact => {
   const { data } = await axios.post('/contacts', contact);
+  console.log(data);
   return data;
 };
 export const deleteContact = async contactId => {
@@ -38,6 +39,7 @@ export const registerUser = async user => {
 export const loginUser = async user => {
   const { data } = await axios.post('/users/login', user);
 
+  setAuthHeader(data.token);
   return data;
 };
 export const logoutUser = async () => {

@@ -12,7 +12,6 @@ export const Form = () => {
   const [form, setForm] = useState(initialState);
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-
   const handleChange = ({ target: { name, value } }) => {
     setForm(prevForm => {
       return { ...prevForm, [name]: value };
