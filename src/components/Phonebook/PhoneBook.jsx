@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteContactThunk,
   fetchContactsThunk,
-} from 'redux/contactsOperations';
-import { selectFilteredContacts } from 'redux/contactsSelectors';
+} from 'redux/contacts/contactsOperations';
+import { selectFilteredContacts } from 'redux/contacts/contactsSelectors';
 
 export const PhoneBook = () => {
   const dispatch = useDispatch();

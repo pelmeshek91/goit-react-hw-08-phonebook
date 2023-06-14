@@ -1,16 +1,20 @@
-import { Form } from './Form/Form';
-import { Filter } from './Filter/Filter';
-import { PhoneBook } from './Phonebook/PhoneBook';
-import s from './App.module.css';
+// import { lazy } from 'react';
+import RegisterPage from 'pages/RegisterPage';
+import LoginPage from 'pages/LoginPage';
+import Layout from './Layout/Layout';
+import PhonebookPage from 'pages/PhonebookPage';
+import HomePage from 'pages/HomePage';
+import { Route, Routes } from 'react-router-dom';
 
 export const App = () => {
   return (
-    <div className={s.phoneBook}>
-      <h1 className={s.title}>Phonebook</h1>
-      <Form />
-      <h2 className={s.title}>Contacts</h2>
-      <Filter />
-      <PhoneBook />
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="register" element={<RegisterPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="phonebook" element={<PhonebookPage />} />
+      </Route>
+    </Routes>
   );
 };

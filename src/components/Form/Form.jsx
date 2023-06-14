@@ -2,8 +2,9 @@ import { useState } from 'react';
 
 import s from './Form.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/contactsSelectors';
-import { addContactThunk } from 'redux/contactsOperations';
+
+import { addContactThunk } from 'redux/contacts/contactsOperations';
+import { selectContacts } from 'redux/contacts/contactsSelectors';
 
 const initialState = { name: '', number: '' };
 
