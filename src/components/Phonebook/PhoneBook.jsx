@@ -1,4 +1,3 @@
-import { UpdateForm } from 'components/UpdateForm/UpdateForm';
 import { useEffect, useState } from 'react';
 import { ImBin, ImPencil } from 'react-icons/im';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +7,7 @@ import {
 } from 'redux/contacts/contactsOperations';
 import { selectFilteredContacts } from 'redux/contacts/contactsSelectors';
 import { Button, ButtonBox, Item, ItemList } from './Phonebook.styled';
+import { UpdateForm } from 'components/UpdateForm/updateForm';
 
 export const PhoneBook = () => {
   const [contactToUpdate, setContactToUpdate] = useState({});
