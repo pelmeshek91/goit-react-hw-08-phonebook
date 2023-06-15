@@ -1,16 +1,26 @@
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { ImExit } from 'react-icons/im';
+import { logoutUserThunk } from 'redux/auth/authOperations';
 import { selectIsLoggedIn } from 'redux/auth/authSelectors';
+import { Button, Exit, Nav, SideBar } from './Navigate.styled';
 
 const Navigation = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const dispatch = useDispatch();
 
   return (
     isLoggedIn && (
-      <nav>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/contacts">Phonebook</NavLink>
-      </nav>
+      <SideBar>
+        <Nav>
+          <Button to="/">Home</Button>
+          <Button to="/contacts">Phonebook</Button>
+
+          <Exit type="button" onClick={() => dispatch(logoutUserThunk())}>
+            <ImExit />
+            Log out
+          </Exit>
+        </Nav>
+      </SideBar>
     )
   );
 };

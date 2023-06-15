@@ -1,12 +1,13 @@
-import { UpdateForm } from 'components/UpdateForm/updateForm';
-import s from './Phonebook.module.css';
+import { UpdateForm } from 'components/UpdateForm/UpdateForm';
 import { useEffect, useState } from 'react';
+import { ImBin, ImPencil } from 'react-icons/im';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   deleteContactThunk,
   fetchContactsThunk,
 } from 'redux/contacts/contactsOperations';
 import { selectFilteredContacts } from 'redux/contacts/contactsSelectors';
+import { Button, ButtonBox, Item, ItemList } from './Phonebook.styled';
 
 export const PhoneBook = () => {
   const [contactToUpdate, setContactToUpdate] = useState({});
@@ -26,30 +27,33 @@ export const PhoneBook = () => {
   };
 
   return (
-    <ul className={s.contactsList}>
+    <ItemList>
       {filterContacts?.map(({ name, number, id }) => {
         return (
-          <li className={s.contactsItem} key={id}>
+          <Item key={id}>
             <p>
-              {name} : {number}
+              {name} :<span>{number}</span>
             </p>
-            <button
-              type="button"
-              onClick={() => {
-                dispatch(deleteContactThunk(id));
-              }}
-            >
-              Delete
-            </button>
-            <button type="button" onClick={() => showUpdateForm(id)}>
-              Edit
-            </button>
-            {contactToUpdate?.id === id && (
-              <UpdateForm contact={contactToUpdate} closeForm={closeForm} />
-            )}
-          </li>
+            <ButtonBox>
+              <Button type="button" onClick={() => showUpdateForm(id)}>
+                <ImPencil />
+              </Button>
+              <Button
+                type="button"
+                onClick={() => {
+                  dispatch(deleteContactThunk(id));
+                }}
+              >
+                <ImBin />
+              </Button>
+
+              {contactToUpdate?.id === id && (
+                <UpdateForm contact={contactToUpdate} closeForm={closeForm} />
+              )}
+            </ButtonBox>
+          </Item>
         );
       })}
-    </ul>
+    </ItemList>
   );
 };

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUserThunk } from 'redux/auth/authOperations';
+import { Box, Button, FormBox, Input, Label } from './LoginPage.styled';
 
 const initialState = {
   email: '',
@@ -22,32 +23,33 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            type="email"
+    <Box>
+      <FormBox onSubmit={handleSubmit}>
+        <h2>Authorization</h2>
+        <Label>
+          <p>Email</p>
+          <Input
             name="email"
+            type="email"
+            placeholder="Enter email"
             value={form.email}
-            placeholder="Enter your email..."
             onChange={handleChange}
           />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
+        </Label>
+        <Label>
+          <p>Password</p>
+          <Input
             name="password"
+            type="password"
+            placeholder="Enter password"
             value={form.password}
-            placeholder="Enter your password..."
             onChange={handleChange}
-            autoComplete="off"
           />
-        </label>
-        <button>Log in</button>
-      </form>
-    </div>
+        </Label>
+
+        <Button type="submit">Login</Button>
+      </FormBox>
+    </Box>
   );
 };
 

@@ -1,9 +1,5 @@
 import { lazy } from 'react';
-import RegisterPage from 'pages/RegisterPage';
-import LoginPage from 'pages/LoginPage';
 import Layout from './Layout/Layout';
-
-import HomePage from 'pages/HomePage';
 import { Route, Routes } from 'react-router-dom';
 import { PrivateRoute } from './PrivateRoutes';
 import { PublicRoute } from './PublicRoutes';
@@ -12,8 +8,11 @@ import { selectToken } from 'redux/auth/authSelectors';
 import { useEffect } from 'react';
 import { getCurrentUserThunk } from 'redux/auth/authOperations';
 import { setAuthHeader } from 'services/connectionsAPI';
+import HomePage from 'pages/HomePage/HomePage';
+import RegisterPage from 'pages/RegisterPage/RegisterPage';
+import LoginPage from 'pages/LoginPage/LoginPage';
 
-const PhonebookPage = lazy(() => import('pages/PhonebookPage'));
+const PhonebookPage = lazy(() => import('pages/PhonebookPage/PhonebookPage'));
 
 export const App = () => {
   const dispatch = useDispatch();

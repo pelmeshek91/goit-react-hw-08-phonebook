@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { registerUserThunk } from 'redux/auth/authOperations';
+import { Box, Button, FormBox, Input, Label } from './RegisterPage.styled';
 
 const initialState = {
   name: '',
@@ -23,21 +24,22 @@ const RegisterPage = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name
-          <input
+    <Box>
+      <FormBox onSubmit={handleSubmit}>
+        <h2>Registration</h2>
+        <Label>
+          <p>Name</p>
+          <Input
             type="text"
             name="name"
             value={form.name}
             placeholder="Enter your name..."
             onChange={handleChange}
           />
-        </label>
-        <label>
-          Email
-          <input
+        </Label>
+        <Label>
+          <p>Email</p>
+          <Input
             type="email"
             name="email"
             value={form.email}
@@ -45,10 +47,10 @@ const RegisterPage = () => {
             onChange={handleChange}
             autoComplete="off"
           />
-        </label>
-        <label>
-          Password
-          <input
+        </Label>
+        <Label>
+          <p>Password</p>
+          <Input
             type="password"
             name="password"
             value={form.password}
@@ -56,10 +58,10 @@ const RegisterPage = () => {
             onChange={handleChange}
             autoComplete="off"
           />
-        </label>
-        <button>Sign up</button>
-      </form>
-    </div>
+        </Label>
+        <Button>Sign up</Button>
+      </FormBox>
+    </Box>
   );
 };
 

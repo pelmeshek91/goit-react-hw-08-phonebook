@@ -40,7 +40,7 @@ img {
   margin: 0;
 }
 
-button {
+/* button {
   cursor: pointer;
   color: rgb(68, 180, 228);
   background-color: rgb(236, 231, 72);
@@ -49,7 +49,7 @@ button {
   padding: 8px;
 
 
-}
+} */
 
 a {
   display: inline-block;
