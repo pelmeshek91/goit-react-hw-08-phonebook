@@ -6,8 +6,8 @@ const PhonebookPage = () => {
   return (
     <div>
       <Form />
-      <PhoneBook />
       <Filter />
+      <PhoneBook />
     </div>
   );
 };

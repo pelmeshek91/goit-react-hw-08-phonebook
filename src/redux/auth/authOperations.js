@@ -18,7 +18,11 @@ export const logoutUserThunk = createAsyncThunk('auth/logOut', () => {
   logoutUser();
   return;
 });
-export const getCurrentUserThunk = createAsyncThunk('auth/refresh', () => {
-  const data = getCurrentUser();
-  return data;
-});
+export const getCurrentUserThunk = createAsyncThunk(
+  'auth/refresh',
+  async () => {
+    const data = await getCurrentUser();
+
+    return data;
+  }
+);

@@ -1,6 +1,4 @@
 import { useDispatch } from 'react-redux';
-// import { logOut } from 'redux/auth/operations';
-
 import { useSelector } from 'react-redux';
 import { logoutUserThunk } from 'redux/auth/authOperations';
 import { selectUser } from 'redux/auth/authSelectors';

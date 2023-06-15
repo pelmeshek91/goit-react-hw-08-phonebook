@@ -2,7 +2,7 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
-const setAuthHeader = token => {
+export const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -16,15 +16,14 @@ export const getAllContacts = async () => {
 };
 export const addContact = async contact => {
   const { data } = await axios.post('/contacts', contact);
-  console.log(data);
   return data;
 };
 export const deleteContact = async contactId => {
   const { data } = await axios.delete(`/contacts/${contactId}`);
   return data;
 };
-export const updateContact = async contactId => {
-  const { data } = await axios.patch(`/contacts/${contactId}`);
+export const updateContact = async ({ id, ...contact }) => {
+  const { data } = await axios.patch(`/contacts/${id}`, contact);
   return data;
 };
 
@@ -43,7 +42,7 @@ export const loginUser = async user => {
   return data;
 };
 export const logoutUser = async () => {
-  await axios('/users/logout');
+  await axios.post('/users/logout');
   unSetAuthHeader();
   return;
 };

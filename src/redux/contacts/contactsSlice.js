@@ -3,6 +3,7 @@ import {
   addContactThunk,
   deleteContactThunk,
   fetchContactsThunk,
+  updateContactThunk,
 } from './contactsOperations';
 import { initialState } from './initialState';
 
@@ -15,7 +16,13 @@ const handleAddContact = ({ contacts }, { payload }) => {
 };
 
 const handleDeleteContact = ({ contacts }, { payload }) => {
+  console.log(payload);
   contacts.items = contacts.items.filter(el => el.id !== payload);
+};
+const handleUpdateContact = ({ contacts }, { payload }) => {
+  const index = contacts.items.findIndex(contact => contact.id === payload.id);
+  contacts.items[index] = payload;
+  contacts.isLoading = false;
 };
 const handlePending = ({ contacts }) => {
   contacts.isLoading = true;
@@ -43,6 +50,7 @@ const contactsSlice = createSlice({
       .addCase(fetchContactsThunk.fulfilled, handleGetContacts)
       .addCase(addContactThunk.fulfilled, handleAddContact)
       .addCase(deleteContactThunk.fulfilled, handleDeleteContact)
+      .addCase(updateContactThunk.fulfilled, handleUpdateContact)
       .addMatcher(action => {
         return action.type.endsWith('/pending');
       }, handlePending)
